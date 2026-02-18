@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pro Minecraft Hosting</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            padding: 0;
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+        header {
+            background: #00aa00;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .plans {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px;
+        }
+        .card {
+            background: #222;
+            padding: 20px;
+            margin: 15px;
+            border-radius: 10px;
+            width: 250px;
+        }
+        .price {
+            font-size: 22px;
+            color: #00ff00;
+        }
+        button {
+            background: #00aa00;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #00ff00;
+        }
+        footer {
+            margin-top: 40px;
+            padding: 15px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+
+<header>🔥 Pro Minecraft Server Hosting 🔥</header>
+
+<h2>Choose Your Plan</h2>
+
+<div class="plans">
+
+    <div class="card">
+        <h3>Basic Plan</h3>
+        <p>1GB RAM</p>
+        <p>10 Players</p>
+        <p class="price">₹99 / Month</p>
+        <button onclick="alert('Contact on WhatsApp: 1234567890')">Buy Now</button>
+    </div>
+
+    <div class="card">
+        <h3>Pro Plan</h3>
+        <p>2GB RAM</p>
+        <p>25 Players</p>
+        <p class="price">₹199 / Month</p>
+        <button onclick="alert('Contact on WhatsApp: 1234567890')">Buy Now</button>
+    </div>
+
+    <div class="card">
+        <h3>Ultimate Plan</h3>
+        <p>4GB RAM</p>
+        <p>Unlimited Players</p>
+        <p class="price">₹399 / Month</p>
+        <button onclick="alert('Contact on WhatsApp: 1234567890')">Buy Now</button>
+    </div>
+
+</div>
+
+<footer>
+© 2026 Pro Minecraft Hosting | All Rights Reserved
+</footer>
+
+</body>
+</html>
