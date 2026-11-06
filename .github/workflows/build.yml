@@ -69,9 +69,16 @@ jobs:
           set -e
           cat client-smoke.log
           echo "runClient process status: $status"
+          crash_report=$(find run/crash-reports -maxdepth 1 -name '*.txt' -print 2>/dev/null | sort | tail -n 1)
+          crash_excerpt=""
+          if [ -n "$crash_report" ]; then
+            crash_excerpt=$(head -n 45 "$crash_report")
+            echo "--- crash report header ---"
+            printf '%s\n' "$crash_excerpt"
+          fi
           if [ "$status" -ne 0 ] && [ "$status" -ne 124 ] && [ "$status" -ne 137 ] && [ "$status" -ne 143 ]; then
             echo "runClient exited before the timeout."
-            detail=$(tail -n 35 client-smoke.log | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')
+            detail=$({ printf '%s\n' "$crash_excerpt"; grep -Ei 'error|exception|failed|GLFW|OpenGL' run/logs/latest.log 2>/dev/null | tail -n 20 || true; tail -n 15 client-smoke.log; } | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')
             printf '::error title=runClient exited early::%s\n' "$detail"
             exit "$status"
           fi
@@ -79,7 +86,7 @@ jobs:
             echo "Minecraft did not reach the sound-engine/title-screen startup marker."
             test ! -f run/logs/latest.log || tail -n 100 run/logs/latest.log
             tail -n 100 client-smoke.log
-            detail=$({ test ! -f run/logs/latest.log || tail -n 28 run/logs/latest.log; tail -n 20 client-smoke.log; } | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')
+            detail=$({ printf '%s\n' "$crash_excerpt"; grep -Ei 'error|exception|failed|GLFW|OpenGL' run/logs/latest.log 2>/dev/null | tail -n 20 || true; tail -n 15 client-smoke.log; } | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')
             printf '::error title=Client startup smoke test failed::%s\n' "$detail"
             exit 1
           fi
