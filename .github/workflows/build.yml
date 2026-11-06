@@ -24,6 +24,21 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Verify pinned MixinSquared artifact metadata
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import urllib.request
+          url = 'https://maven.bawnorton.com/releases/com/github/bawnorton/mixinsquared/mixinsquared-fabric/0.3.7/mixinsquared-fabric-0.3.7.jar'
+          with urllib.request.urlopen(url, timeout=60) as response:
+              data = response.read()
+          sha1 = hashlib.sha1(data).hexdigest()
+          sha512 = hashlib.sha512(data).hexdigest()
+          assert sha1 == '5127cfe96a31e8d0ede547e4e6518fbc61bef8d2', sha1
+          assert sha512 == 'a38a43c43b5d1aee4f8530da5dafbc2eaf619c67922d079fa4f8ccd11864a8c7e91daf8cde6de9849f6fa138483958e8e12cef7ec4f4d3fa4ff6818a80918f58', sha512
+          print(f'::notice title=MixinSquared artifact::size={len(data)} sha1={sha1} sha512={sha512}')
+          PY
+
       - name: Build Fabric mod and packages
         run: |
           if ! ./gradlew --no-daemon --stacktrace build buildMrpack buildBundleZip > build.log 2>&1; then
