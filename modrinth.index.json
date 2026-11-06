@@ -66,21 +66,6 @@
       "fileSize": 302709
     },
     {
-      "path": "mods/entityculling-fabric-1.11.3-mc1.21.11.jar",
-      "hashes": {
-        "sha1": "ce2e1cf7e343a625d184c80ccea582d468686a2e",
-        "sha512": "4b5516bf8718d74db0e0368ad2fd2f5ce3e986c3abbf65426418ce3ec162651d29579b9be8aa0d34b88f47e310f6b7bab56bde7ff1223c35998bff0bcbed58c5"
-      },
-      "env": {
-        "client": "required",
-        "server": "unsupported"
-      },
-      "downloads": [
-        "https://cdn.modrinth.com/data/NNAgCjsB/versions/CTabrwB1/entityculling-fabric-1.11.3-mc1.21.11.jar"
-      ],
-      "fileSize": 1529094
-    },
-    {
       "path": "mods/moreculling-fabric-1.21.11-1.6.2.jar",
       "hashes": {
         "sha1": "11a929de62650cc536244d4c2ba889fa84c1c0f2",
@@ -111,34 +96,19 @@
       "fileSize": 82260
     },
     {
-      "path": "mods/clienttweaks-fabric-1.21.11-21.11.6.jar",
+      "path": "mods/conditional-mixin-fabric-0.6.3.jar",
       "hashes": {
-        "sha1": "10f63b0006e731d5e6d45d1454f74b6f46dd5076",
-        "sha512": "ada1f9b981d84c13b627c599ed0bd37a4d6d68406529eaab78ded032d531fbd17925abd7c9947ce2a4b980ad418e47b3ead2ceeab3b5cc92bbafea3ca44b188c"
+        "sha1": "f6a471d57731cebb2d7328ea69bdae97ee3f24cb",
+        "sha512": "74ec8a5b46e924c2122d72c5d25afef0970b39b89037c813641118201201d044225c1029ad8ba4b178f4f67c47f7ded515ce2ce93bb8ec37781d9bcd20eea5dd"
       },
       "env": {
         "client": "required",
         "server": "unsupported"
       },
       "downloads": [
-        "https://cdn.modrinth.com/data/vPNqo58Q/versions/sOJMpaLr/clienttweaks-fabric-1.21.11-21.11.6.jar"
+        "https://maven.fallenbreath.me/releases/me/fallenbreath/conditional-mixin-fabric/0.6.3/conditional-mixin-fabric-0.6.3.jar"
       ],
-      "fileSize": 168426
-    },
-    {
-      "path": "mods/balm-fabric-1.21.11-21.11.9.1.jar",
-      "hashes": {
-        "sha1": "5bb8ca8fb46953da5777c1b3c12af5b397b46b48",
-        "sha512": "8c1d759a5abb065da25b395c166c82435417ad456995930cff7bba6c12067206efa57c8ca2c9accd3beb2e40c35982238519fc2a3697794998929c37a20377e2"
-      },
-      "env": {
-        "client": "required",
-        "server": "unsupported"
-      },
-      "downloads": [
-        "https://cdn.modrinth.com/data/MBAkmtvl/versions/5POKgjJn/balm-fabric-1.21.11-21.11.9.1.jar"
-      ],
-      "fileSize": 873058
+      "fileSize": 28152
     },
     {
       "path": "mods/modernfix-5.26.3-build.2.jar",

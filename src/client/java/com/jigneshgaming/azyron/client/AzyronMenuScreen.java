@@ -20,11 +20,9 @@ public final class AzyronMenuScreen extends Screen {
             new ModEntry("Lithium", "lithium", "0.21.4", "Game logic"),
             new ModEntry("FerriteCore", "ferritecore", "8.2.0", "Memory use"),
             new ModEntry("ImmediatelyFast", "immediatelyfast", "1.14.3", "GUI and immediate rendering"),
-            new ModEntry("Entity Culling", "entityculling", "1.11.3", "Hidden entities"),
             new ModEntry("More Culling", "moreculling", "1.6.2", "Additional visibility culling"),
             new ModEntry("MixinSquared", "mixinsquared", "0.2.0", "More Culling mixin support"),
-            new ModEntry("Client Tweaks", "clienttweaks", "21.11.6", "More Culling compatibility target"),
-            new ModEntry("Balm", "balm", "21.11.9.1", "Client Tweaks dependency"),
+            new ModEntry("Conditional Mixin", "conditional-mixin", "0.6.3", "More Culling mixin condition support"),
             new ModEntry("ModernFix-mVUS", "modernfix", "5.26.3-build.2", "Memory and loading fixes"),
             new ModEntry("Dynamic FPS", "dynamic_fps", "3.11.6", "Background resource use"),
             new ModEntry("Fabric API", "fabric-api", "0.141.6", "Required Fabric API"),
@@ -316,7 +314,7 @@ public final class AzyronMenuScreen extends Screen {
             int statusX = contentX + contentWidth - 72;
             drawText(context, status, statusX, y + 7, statusColor);
         }
-        drawText(context, "More Culling's Client Tweaks hook uses MixinSquared; Client Tweaks requires Balm.",
+        drawText(context, "More Culling uses MixinSquared and Conditional Mixin; Cloth Config is required.",
                 contentX + 10, rowY + PERFORMANCE_MODS.length * rowHeight + 5, COLOR_MUTED);
         drawText(context, "ModernFix-mVUS is the 1.21.11-compatible continuation build in this pinned stack.",
                 contentX + 10, rowY + PERFORMANCE_MODS.length * rowHeight + 21, COLOR_MUTED);
