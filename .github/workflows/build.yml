@@ -65,12 +65,16 @@ jobs:
           fi
           if ! grep -q "Sound engine started" run/logs/latest.log; then
             echo "Minecraft did not reach the sound-engine/title-screen startup marker."
-            test ! -f run/logs/latest.log || cat run/logs/latest.log
+            test ! -f run/logs/latest.log || tail -n 100 run/logs/latest.log
+            tail -n 100 client-smoke.log
+            detail=$({ test ! -f run/logs/latest.log || tail -n 28 run/logs/latest.log; tail -n 20 client-smoke.log; } | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')
+            printf '::error title=Client startup smoke test failed::%s\n' "$detail"
             exit 1
           fi
           echo "Minecraft client reached startup with the pinned Fabric mod stack."
 
-      - name: Upload build outputs
+      - name: Upload build outputs and smoke logs
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: Azyron-Client-1.0-Minecraft-1.21.11
@@ -79,5 +83,7 @@ jobs:
             build/libs/Azyron-Client-1.0-sources.jar
             release/Azyron-Client-1.0.mrpack
             release/Azyron-Client-1.0-Fabric-1.21.11.zip
-          if-no-files-found: error
+            client-smoke.log
+            run/logs/latest.log
+          if-no-files-found: warn
           retention-days: 30
