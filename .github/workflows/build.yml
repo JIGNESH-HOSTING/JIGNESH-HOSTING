@@ -53,14 +53,18 @@ jobs:
           PY
 
       - name: Launch smoke test with software rendering
+        id: client_smoke
         run: |
           set +e
           timeout --signal=TERM --kill-after=15s 150s xvfb-run -a env LIBGL_ALWAYS_SOFTWARE=1 ./gradlew --no-daemon runClient > client-smoke.log 2>&1
           status=$?
           set -e
           cat client-smoke.log
+          echo "runClient process status: $status"
           if [ "$status" -ne 0 ] && [ "$status" -ne 124 ] && [ "$status" -ne 137 ] && [ "$status" -ne 143 ]; then
-            echo "runClient exited before the timeout (status $status)."
+            echo "runClient exited before the timeout."
+            detail=$(tail -n 35 client-smoke.log | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')
+            printf '::error title=runClient exited early::%s\n' "$detail"
             exit "$status"
           fi
           if ! grep -q "Sound engine started" run/logs/latest.log; then
