@@ -55,7 +55,7 @@ The one-click Potato action reapplies these values at any time. Balanced uses a 
 
 ## Build the client jar
 
-Requirements: **JDK 21**, an internet connection to Fabric/Mojang/Modrinth repositories, and **Python 3.8+** only if building the `.mrpack`.
+Requirements: **JDK 25 to run the pinned Fabric Loom 1.19 snapshot** (the compiled mod targets Java 21 bytecode), internet access to Fabric/Mojang/Modrinth repositories, and **Python 3.8+** for packaging. The finished mod and Minecraft 1.21.11 runtime require Java 21 or newer; Pojav can use Java 21.
 
 ```bash
 ./gradlew build
