@@ -26,8 +26,13 @@ jobs:
 
       - name: Build Fabric mod and packages
         run: |
-          ./gradlew --no-daemon build
-          ./gradlew --no-daemon buildMrpack buildBundleZip
+          if ! ./gradlew --no-daemon --stacktrace build buildMrpack buildBundleZip > build.log 2>&1; then
+            tail -n 120 build.log
+            message=$(tail -n 14 build.log | tr '\n' ' ' | sed 's/%/%25/g; s/\r/%0D/g')
+            printf '::error title=Gradle build failure::%s\n' "$message"
+            exit 1
+          fi
+          cat build.log
 
       - name: Verify archive structure
         run: |
