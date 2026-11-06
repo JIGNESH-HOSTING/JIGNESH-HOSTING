@@ -68,9 +68,10 @@ jobs:
               assert metadata['depends']['minecraft'] == '1.21.11'
           with zipfile.ZipFile('release/Azyron-Client-1.0-Fabric-1.21.11.zip') as bundle:
               names = bundle.namelist()
-              assert len([name for name in names if name.startswith('mods/') and name.endswith('.jar')]) == 11
+              assert len([name for name in names if name.startswith('mods/') and name.endswith('.jar')]) == 12
               assert 'mods/Azyron-Client-1.0.jar' in names
-          print('Fabric metadata and 11 bundled mod jars verified.')
+              assert 'mods/mixinsquared-fabric-0.3.7.jar' in names
+          print('Fabric metadata and 12 bundled mod jars verified.')
           PY
 
       - name: Install headless OpenGL test dependencies
