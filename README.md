@@ -12,7 +12,7 @@ A real client-side Fabric mod for **Minecraft: Java Edition 1.21.11 only**, bran
 
 ## Included performance stack
 
-The pack pins exact versioned files: its Modrinth releases are tagged for Minecraft 1.21.11/Fabric, and MixinSquared 0.2.0 is pinned from Bawnorton Maven as More Culling's required runtime dependency. No versions are resolved dynamically.
+The pack pins exact versioned files: its Modrinth releases are tagged for Minecraft 1.21.11/Fabric, and MixinSquared 0.2.0 is pinned from Bawnorton Maven for More Culling's Client Tweaks compatibility hook. No versions are resolved dynamically.
 
 | Mod | Pinned version | Purpose / dependency |
 | --- | --- | --- |
@@ -21,8 +21,10 @@ The pack pins exact versioned files: its Modrinth releases are tagged for Minecr
 | FerriteCore | 8.2.0 | Lower memory use |
 | ImmediatelyFast | 1.14.3 | GUI and immediate-mode rendering |
 | Entity Culling | 1.11.3 | Avoid rendering hidden entities and block entities; requires Fabric API |
-| More Culling | 1.6.2 | Additional visibility culling; requires Cloth Config and MixinSquared |
-| MixinSquared | 0.2.0 | Required version used by More Culling's mixin handlers |
+| More Culling | 1.6.2 | Additional visibility culling; requires Cloth Config; includes its Client Tweaks compatibility hook |
+| MixinSquared | 0.2.0 | Required by More Culling's Client Tweaks compatibility mixin |
+| Client Tweaks | 21.11.6 | Provides the optional mixin target More Culling expects; requires Balm |
+| Balm | 21.11.9.1 | Required by Client Tweaks; Fabric API is already included |
 | ModernFix-mVUS | 5.26.3-build.2 | 1.21.11-compatible continuation build of ModernFix |
 | Dynamic FPS | 3.11.6 | Reduces resource use while unfocused; requires Fabric API |
 | Fabric API | 0.141.6+1.21.11 | Required API dependency |
@@ -88,7 +90,7 @@ To create a complete installable Modrinth pack **after** building the jar:
 
 The Modrinth pack is written to `release/Azyron-Client-1.0.mrpack`. Its pinned performance jars download from Modrinth during import; the compiled AZYRON jar is included as an override. Import the `.mrpack` using Prism Launcher or another Modrinth-pack-compatible launcher.
 
-For a self-contained mods-folder ZIP with **all 12 JAR files included**, run:
+For a self-contained mods-folder ZIP with **all 14 JAR files included**, run:
 
 ```bash
 ./gradlew buildBundleZip
@@ -101,7 +103,7 @@ This downloads each pinned dependency, checks its SHA-1, SHA-512, and file size,
 1. Back up the target instance and any worlds first.
 2. In PojavLauncher, create/select a **Minecraft 1.21.11** instance and install Fabric Loader 0.20.1 (or a newer Fabric Loader build that still installs against 1.21.11). Do not choose another Minecraft version.
 3. Select a **Java 21** runtime in PojavLauncher. Minecraft 1.21.11 requires Java 21; a different runtime may fail before mod loading.
-4. Download the self-contained `Azyron-Client-1.0-Fabric-1.21.11.zip` bundle, extract it into the selected instance's game directory, and merge its `mods/` folder. It contains AZYRON and all 11 pinned dependency jars, including MixinSquared for More Culling. Alternatively, install `Azyron-Client-1.0.jar` with the other exact-version jars listed above; keep one version of each mod only.
+4. Download the self-contained `Azyron-Client-1.0-Fabric-1.21.11.zip` bundle, extract it into the selected instance's game directory, and merge its `mods/` folder. It contains AZYRON and all 13 pinned dependency jars, including MixinSquared, Client Tweaks, and Balm for More Culling's compatibility mixin. Alternatively, install `Azyron-Client-1.0.jar` with the other exact-version jars listed above; keep one version of each mod only.
 5. Launch the Fabric profile. AZYRON applies its first-run settings automatically; open its title-screen button or press Right Shift in-game.
 6. If rendering fails, try a Pojav renderer supported by the device/GPU and remove optional performance mods one at a time to isolate driver-specific issues. Sodium depends on working OpenGL support; no renderer or device can be guaranteed here.
 

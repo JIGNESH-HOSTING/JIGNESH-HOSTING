@@ -36,10 +36,10 @@ Use the selected instance's actual game directory. Set Java 21 and Minecraft
 1.21.11 with Fabric Loader 0.20.1 before copying the mods. OpenGL renderer and
 GPU compatibility vary by device; no Pojav renderer/device is guaranteed.
 
-This bundle includes AZYRON CLIENT plus 11 pinned dependency jars: Fabric API,
+This bundle includes AZYRON CLIENT plus 13 pinned dependency jars: Fabric API,
 Cloth Config, Sodium, Lithium, FerriteCore, ImmediatelyFast, Entity Culling,
-More Culling, MixinSquared, ModernFix-mVUS, and Dynamic FPS. The included
-modrinth.index.json records pinned versions and verified checksums.
+More Culling, MixinSquared, Client Tweaks, Balm, ModernFix-mVUS, and Dynamic
+FPS. The included modrinth.index.json records pinned versions and checksums.
 """
 
 
@@ -52,8 +52,8 @@ def load_and_validate_index():
         raise SystemExit("Refusing to package: expected Minecraft 1.21.11 and Fabric Loader 0.20.1.")
 
     entries = index.get("files", [])
-    if len(entries) != 11:
-        raise SystemExit(f"Expected the 11 pinned client mods and dependencies; found {len(entries)}.")
+    if len(entries) != 13:
+        raise SystemExit(f"Expected the 13 pinned client mods and dependencies; found {len(entries)}.")
 
     seen_paths = set()
     for entry in entries:

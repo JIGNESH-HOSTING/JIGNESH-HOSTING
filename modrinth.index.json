@@ -111,6 +111,36 @@
       "fileSize": 82260
     },
     {
+      "path": "mods/clienttweaks-fabric-1.21.11-21.11.6.jar",
+      "hashes": {
+        "sha1": "10f63b0006e731d5e6d45d1454f74b6f46dd5076",
+        "sha512": "ada1f9b981d84c13b627c599ed0bd37a4d6d68406529eaab78ded032d531fbd17925abd7c9947ce2a4b980ad418e47b3ead2ceeab3b5cc92bbafea3ca44b188c"
+      },
+      "env": {
+        "client": "required",
+        "server": "unsupported"
+      },
+      "downloads": [
+        "https://cdn.modrinth.com/data/vPNqo58Q/versions/sOJMpaLr/clienttweaks-fabric-1.21.11-21.11.6.jar"
+      ],
+      "fileSize": 168426
+    },
+    {
+      "path": "mods/balm-fabric-1.21.11-21.11.9.1.jar",
+      "hashes": {
+        "sha1": "5bb8ca8fb46953da5777c1b3c12af5b397b46b48",
+        "sha512": "8c1d759a5abb065da25b395c166c82435417ad456995930cff7bba6c12067206efa57c8ca2c9accd3beb2e40c35982238519fc2a3697794998929c37a20377e2"
+      },
+      "env": {
+        "client": "required",
+        "server": "unsupported"
+      },
+      "downloads": [
+        "https://cdn.modrinth.com/data/MBAkmtvl/versions/5POKgjJn/balm-fabric-1.21.11-21.11.9.1.jar"
+      ],
+      "fileSize": 873058
+    },
+    {
       "path": "mods/modernfix-5.26.3-build.2.jar",
       "hashes": {
         "sha1": "5a51d1a9768bbf9943e6eef83abf43d2b82baa30",
