@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.jigneshgaming.azyron.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "LevelLoadingScreenMixin",
+    "MouseMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

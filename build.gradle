@@ -1,0 +1,101 @@
+plugins {
+    id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    // Loom supplies Mojang and Fabric repositories. Modrinth is used only for
+    // the pinned runtime-only performance mods in the development profile.
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+        content {
+            includeGroup 'maven.modrinth'
+        }
+    }
+}
+
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        'azyron_client' {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    // Pinned 1.21.11-only client stack for ./gradlew runClient.
+    // These are kept out of the AZYRON jar; the pack index is the distributable list.
+    modRuntimeOnly 'maven.modrinth:AANobbMI:rkdTcxoT' // Sodium 0.8.14
+    modRuntimeOnly 'maven.modrinth:gvQqBUqZ:Ow7wA0kG' // Lithium 0.21.4
+    modRuntimeOnly 'maven.modrinth:uXXizFIs:Ii0gP3D8' // FerriteCore 8.2.0
+    modRuntimeOnly 'maven.modrinth:5ZwdcRci:4EwhsTu7' // ImmediatelyFast 1.14.3
+    modRuntimeOnly 'maven.modrinth:NNAgCjsB:CTabrwB1' // Entity Culling 1.11.3
+    modRuntimeOnly 'maven.modrinth:51shyZVL:wOzykoLV' // More Culling 1.6.2
+    modRuntimeOnly 'maven.modrinth:TjSm1wrD:QrRIY2rV' // ModernFix-mVUS 5.26.3-build.2
+    modRuntimeOnly 'maven.modrinth:LQ3K71Q1:Fab7e5Th' // Dynamic FPS 3.11.6
+    modRuntimeOnly 'maven.modrinth:9s6osm5g:xuX40TN5' // Cloth Config 21.11.153 (More Culling dependency)
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+    options.encoding = 'UTF-8'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+    withSourcesJar()
+}
+
+jar {
+    from('LICENSE') {
+        rename { "${it}_${project.archives_base_name}" }
+    }
+}
+
+// Creates a real Modrinth pack after remapJar has produced the AZYRON mod jar.
+tasks.register('buildMrpack', Exec) {
+    dependsOn tasks.named('remapJar')
+    doFirst {
+        def remappedJar = tasks.named('remapJar').get().archiveFile.get().asFile
+        if (!remappedJar.exists()) {
+            throw new GradleException("Missing remapped mod jar: ${remappedJar}")
+        }
+        commandLine 'python3', 'scripts/build_mrpack.py', '--jar', remappedJar.absolutePath,
+                '--output', 'release/Azyron-Client-1.0.mrpack'
+    }
+}
+
+tasks.register('buildBundleZip', Exec) {
+    dependsOn tasks.named('remapJar')
+    doFirst {
+        def remappedJar = tasks.named('remapJar').get().archiveFile.get().asFile
+        if (!remappedJar.exists()) {
+            throw new GradleException("Missing remapped mod jar: ${remappedJar}")
+        }
+        commandLine 'python3', 'scripts/build_modpack_zip.py', '--jar', remappedJar.absolutePath,
+                '--output', 'release/Azyron-Client-1.0-Fabric-1.21.11.zip'
+    }
+}

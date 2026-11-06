@@ -1,0 +1,78 @@
+name: Build AZYRON CLIENT
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build Fabric mod and packages
+        run: |
+          ./gradlew --no-daemon build
+          ./gradlew --no-daemon buildMrpack buildBundleZip
+
+      - name: Verify archive structure
+        run: |
+          unzip -t build/libs/Azyron-Client-1.0.jar
+          unzip -t release/Azyron-Client-1.0-Fabric-1.21.11.zip
+          python3 - <<'PY'
+          import json, zipfile
+          with zipfile.ZipFile('build/libs/Azyron-Client-1.0.jar') as jar:
+              metadata = json.loads(jar.read('fabric.mod.json'))
+              assert metadata['id'] == 'azyron_client'
+              assert metadata['version'] == '1.0'
+              assert metadata['depends']['minecraft'] == '1.21.11'
+          with zipfile.ZipFile('release/Azyron-Client-1.0-Fabric-1.21.11.zip') as bundle:
+              names = bundle.namelist()
+              assert len([name for name in names if name.startswith('mods/') and name.endswith('.jar')]) == 11
+              assert 'mods/Azyron-Client-1.0.jar' in names
+          print('Fabric metadata and 11 bundled mod jars verified.')
+          PY
+
+      - name: Launch smoke test with software rendering
+        run: |
+          set +e
+          timeout --signal=TERM --kill-after=15s 150s xvfb-run -a env LIBGL_ALWAYS_SOFTWARE=1 ./gradlew --no-daemon runClient > client-smoke.log 2>&1
+          status=$?
+          set -e
+          cat client-smoke.log
+          if [ "$status" -ne 0 ] && [ "$status" -ne 124 ] && [ "$status" -ne 137 ] && [ "$status" -ne 143 ]; then
+            echo "runClient exited before the timeout (status $status)."
+            exit "$status"
+          fi
+          if ! grep -q "Sound engine started" run/logs/latest.log; then
+            echo "Minecraft did not reach the sound-engine/title-screen startup marker."
+            test ! -f run/logs/latest.log || cat run/logs/latest.log
+            exit 1
+          fi
+          echo "Minecraft client reached startup with the pinned Fabric mod stack."
+
+      - name: Upload build outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: Azyron-Client-1.0-Minecraft-1.21.11
+          path: |
+            build/libs/Azyron-Client-1.0.jar
+            build/libs/Azyron-Client-1.0-sources.jar
+            release/Azyron-Client-1.0.mrpack
+            release/Azyron-Client-1.0-Fabric-1.21.11.zip
+          if-no-files-found: error
+          retention-days: 30

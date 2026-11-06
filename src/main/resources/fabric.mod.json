@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "azyron_client",
+  "version": "${version}",
+  "name": "AZYRON CLIENT",
+  "description": "A lightweight, 1.21.11-only Fabric client with configurable HUD and practical FPS profiles.",
+  "authors": [
+    "JIGNESH GAMING"
+  ],
+  "contact": {
+    "sources": "https://github.com/JIGNESH-HOSTING/JIGNESH-HOSTING"
+  },
+  "license": "MIT",
+  "icon": "assets/azyron/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.jigneshgaming.azyron.client.AzyronClient"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "azyron.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
