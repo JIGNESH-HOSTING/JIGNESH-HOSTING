@@ -118,11 +118,11 @@ public final class HudOverlay {
         var options = client.options;
         drawKey(context, font, options.forwardKey.getBoundKeyLocalizedText().getString(),
                 options.forwardKey.isPressed(), x + 27, y + 16, 22, 17);
-        drawKey(context, options.leftKey.getBoundKeyLocalizedText().getString(),
+        drawKey(context, font, options.leftKey.getBoundKeyLocalizedText().getString(),
                 options.leftKey.isPressed(), x + 5, y + 36, 22, 17);
-        drawKey(context, options.backKey.getBoundKeyLocalizedText().getString(),
+        drawKey(context, font, options.backKey.getBoundKeyLocalizedText().getString(),
                 options.backKey.isPressed(), x + 27, y + 36, 22, 17);
-        drawKey(context, options.rightKey.getBoundKeyLocalizedText().getString(),
+        drawKey(context, font, options.rightKey.getBoundKeyLocalizedText().getString(),
                 options.rightKey.isPressed(), x + 49, y + 36, 22, 17);
     }
 
