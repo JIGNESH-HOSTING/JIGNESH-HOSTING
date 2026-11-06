@@ -29,7 +29,7 @@ jobs:
           python3 - <<'PY'
           import hashlib
           import urllib.request
-          url = 'https://maven.bawnorton.com/releases/com/github/bawnorton/mixinsquared/mixinsquared-fabric/0.3.7/mixinsquared-fabric-0.3.7.jar'
+          url = 'https://maven.bawnorton.com/releases/com/github/bawnorton/mixinsquared/mixinsquared-fabric/0.2.0/mixinsquared-fabric-0.2.0.jar'
           request = urllib.request.Request(url, headers={'User-Agent': 'AZYRON-CLIENT/1.0 dependency-verifier'})
           try:
               with urllib.request.urlopen(request, timeout=60) as response:
@@ -39,7 +39,7 @@ jobs:
               raise
           sha1 = hashlib.sha1(data).hexdigest()
           sha512 = hashlib.sha512(data).hexdigest()
-          if sha1 != '5127cfe96a31e8d0ede547e4e6518fbc61bef8d2' or sha512 != 'a38a43c43b5d1aee4f8530da5dafbc2eaf619c67922d079fa4f8ccd11864a8c7e91daf8cde6de9849f6fa138483958e8e12cef7ec4f4d3fa4ff6818a80918f58':
+          if len(data) != 82260 or sha1 != '2293fab688a8a15cacbccd5c5e6816e532b67a98' or sha512 != 'f2d15e2f7c90110bce7bf87d185b79aa1a3a71a326c9ec93eccec07b4b1568dd6a45a9602f34bab43d933345c2b42f32fc675dfe93a953bd7a7c92f8ae50710d':
               print(f'::error title=MixinSquared checksum mismatch::size={len(data)} sha1={sha1} sha512={sha512}')
               raise SystemExit(1)
           print(f'::notice title=MixinSquared artifact::size={len(data)} sha1={sha1} sha512={sha512}')
@@ -70,7 +70,7 @@ jobs:
               names = bundle.namelist()
               assert len([name for name in names if name.startswith('mods/') and name.endswith('.jar')]) == 12
               assert 'mods/Azyron-Client-1.0.jar' in names
-              assert 'mods/mixinsquared-fabric-0.3.7.jar' in names
+              assert 'mods/mixinsquared-fabric-0.2.0.jar' in names
           print('Fabric metadata and 12 bundled mod jars verified.')
           PY
 

@@ -53,7 +53,7 @@ dependencies {
     modRuntimeOnly 'maven.modrinth:5ZwdcRci:4EwhsTu7' // ImmediatelyFast 1.14.3
     modRuntimeOnly 'maven.modrinth:NNAgCjsB:CTabrwB1' // Entity Culling 1.11.3
     modRuntimeOnly 'maven.modrinth:51shyZVL:wOzykoLV' // More Culling 1.6.2
-    modRuntimeOnly 'com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.3.7' // More Culling mixin support
+    modRuntimeOnly 'com.github.bawnorton.mixinsquared:mixinsquared-fabric:0.2.0' // More Culling mixin support
     modRuntimeOnly 'maven.modrinth:TjSm1wrD:QrRIY2rV' // ModernFix-mVUS 5.26.3-build.2
     modRuntimeOnly 'maven.modrinth:LQ3K71Q1:Fab7e5Th' // Dynamic FPS 3.11.6
     modRuntimeOnly 'maven.modrinth:9s6osm5g:xuX40TN5' // Cloth Config 21.11.153 (More Culling dependency)

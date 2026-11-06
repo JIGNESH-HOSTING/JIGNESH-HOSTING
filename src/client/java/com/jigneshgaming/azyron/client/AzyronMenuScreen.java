@@ -22,7 +22,7 @@ public final class AzyronMenuScreen extends Screen {
             new ModEntry("ImmediatelyFast", "immediatelyfast", "1.14.3", "GUI and immediate rendering"),
             new ModEntry("Entity Culling", "entityculling", "1.11.3", "Hidden entities"),
             new ModEntry("More Culling", "moreculling", "1.6.2", "Additional visibility culling"),
-            new ModEntry("MixinSquared", "mixinsquared", "0.3.7", "More Culling mixin support"),
+            new ModEntry("MixinSquared", "mixinsquared", "0.2.0", "More Culling mixin support"),
             new ModEntry("ModernFix-mVUS", "modernfix", "5.26.3-build.2", "Memory and loading fixes"),
             new ModEntry("Dynamic FPS", "dynamic_fps", "3.11.6", "Background resource use"),
             new ModEntry("Fabric API", "fabric-api", "0.141.6", "Required Fabric API"),

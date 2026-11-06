@@ -96,19 +96,19 @@
       "fileSize": 340975
     },
     {
-      "path": "mods/mixinsquared-fabric-0.3.7.jar",
+      "path": "mods/mixinsquared-fabric-0.2.0.jar",
       "hashes": {
-        "sha1": "5127cfe96a31e8d0ede547e4e6518fbc61bef8d2",
-        "sha512": "a38a43c43b5d1aee4f8530da5dafbc2eaf619c67922d079fa4f8ccd11864a8c7e91daf8cde6de9849f6fa138483958e8e12cef7ec4f4d3fa4ff6818a80918f58"
+        "sha1": "2293fab688a8a15cacbccd5c5e6816e532b67a98",
+        "sha512": "f2d15e2f7c90110bce7bf87d185b79aa1a3a71a326c9ec93eccec07b4b1568dd6a45a9602f34bab43d933345c2b42f32fc675dfe93a953bd7a7c92f8ae50710d"
       },
       "env": {
         "client": "required",
         "server": "unsupported"
       },
       "downloads": [
-        "https://maven.bawnorton.com/releases/com/github/bawnorton/mixinsquared/mixinsquared-fabric/0.3.7/mixinsquared-fabric-0.3.7.jar"
+        "https://maven.bawnorton.com/releases/com/github/bawnorton/mixinsquared/mixinsquared-fabric/0.2.0/mixinsquared-fabric-0.2.0.jar"
       ],
-      "fileSize": 122909
+      "fileSize": 82260
     },
     {
       "path": "mods/modernfix-5.26.3-build.2.jar",

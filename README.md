@@ -12,7 +12,7 @@ A real client-side Fabric mod for **Minecraft: Java Edition 1.21.11 only**, bran
 
 ## Included performance stack
 
-The pack pins exact versioned files: its Modrinth releases are tagged for Minecraft 1.21.11/Fabric, and MixinSquared 0.3.7 is pinned from Bawnorton Maven as More Culling's required runtime dependency. No versions are resolved dynamically.
+The pack pins exact versioned files: its Modrinth releases are tagged for Minecraft 1.21.11/Fabric, and MixinSquared 0.2.0 is pinned from Bawnorton Maven as More Culling's required runtime dependency. No versions are resolved dynamically.
 
 | Mod | Pinned version | Purpose / dependency |
 | --- | --- | --- |
@@ -22,7 +22,7 @@ The pack pins exact versioned files: its Modrinth releases are tagged for Minecr
 | ImmediatelyFast | 1.14.3 | GUI and immediate-mode rendering |
 | Entity Culling | 1.11.3 | Avoid rendering hidden entities and block entities; requires Fabric API |
 | More Culling | 1.6.2 | Additional visibility culling; requires Cloth Config and MixinSquared |
-| MixinSquared | 0.3.7 | Required by More Culling's mixin handlers |
+| MixinSquared | 0.2.0 | Required version used by More Culling's mixin handlers |
 | ModernFix-mVUS | 5.26.3-build.2 | 1.21.11-compatible continuation build of ModernFix |
 | Dynamic FPS | 3.11.6 | Reduces resource use while unfocused; requires Fabric API |
 | Fabric API | 0.141.6+1.21.11 | Required API dependency |
